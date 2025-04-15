@@ -25,8 +25,8 @@ COPY --from=builder /app/package.json ./package.json
 COPY --from=builder /app/package-lock.json ./package-lock.json
 COPY --from=builder /app/build ./build
 
-# Cài đặt CHỈ production dependencies
-RUN npm ci --omit=dev
+# Cài đặt CHỈ production dependencies và bỏ qua các script (như prepare)
+RUN npm ci --omit=dev --ignore-scripts
 
 # Mở cổng mà ứng dụng sẽ chạy (adapter-node mặc định 3000 hoặc đọc biến PORT)
 EXPOSE 3000
